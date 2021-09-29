@@ -13,7 +13,6 @@ class LinearRegression:
         self._x = np.array(x,dtype='float') 
         self._y = np.array(y,dtype='float') 
         self._numRecords = self._x.shape[0]
-        self._numFeatures = self._y.shape[0]
 
     """
     Closed Form Solution
@@ -21,7 +20,7 @@ class LinearRegression:
     def getParametersClosedForm(self):
         # Converting the input into suitable shapes
         self._x = appendNumberToEveryRow(self._x,1)
-        self._y = reshapeVector(self._y,(self._numFeatures,1))
+        self._y = reshapeVector(self._y,(self._numRecords,1))
 
         # Performing the Calculation
         x = self._x
@@ -43,8 +42,31 @@ class LinearRegression:
     """
     Gradient Descent Solution
     """
-    def getParametersGradientDescent(self,learningRate,numInterations,decay):
-        pass 
+    def getParametersGradientDescent(self,learningRate = 0.000001,numInterations = 100,decay = 0):
+        # Converting the input into suitable shapes
+        self._x = appendNumberToEveryRow(self._x,1)
+        weights = np.zeros((self._x.shape[1],1))
+
+        # Performing the calculation
+        x = self._x 
+        y = self._y 
+        n = self._numRecords
+
+        for _ in range(numInterations):
+
+            # Step 1 
+            calc1 = np.dot(x,weights)
+
+            # Step 2 
+            calc2 = (2.0/n) * np.dot(x.T,calc1-y)
+
+            # Step 3 
+            weights = weights - learningRate*calc2 
+
+            # Step 4 
+            learningRate -= decay
+        
+        return weights
     
     """
     Newton's Method Solution
