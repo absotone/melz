@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd 
-from RegressionHelpers import appendNumberToEveryRow,reshapeVector
+from RegressionHelpers import appendNumberToEveryRow,reshapeVector, getMeanSquaredError
 
 """
 Implementation of Multivariate Linear Regression
@@ -19,12 +19,9 @@ class LinearRegression:
     """
     def getParametersClosedForm(self):
         # Converting the input into suitable shapes
-        self._x = appendNumberToEveryRow(self._x,1)
-        self._y = reshapeVector(self._y,(self._numRecords,1))
+        x = appendNumberToEveryRow(self._x,1)
+        y = reshapeVector(self._y,(self._numRecords,1))
 
-        # Performing the Calculation
-        x = self._x
-        y = self._y
 
         # Step 1
         calc1 = np.dot(x.T,x)
@@ -42,14 +39,13 @@ class LinearRegression:
     """
     Gradient Descent Solution
     """
-    def getParametersGradientDescent(self,learningRate = 0.000001,numInterations = 100,decay = 0):
+    def getParametersGradientDescent(self,learningRate = 0.00001,numInterations = 1000,decay = 0):
         # Converting the input into suitable shapes
-        self._x = appendNumberToEveryRow(self._x,1)
-        weights = np.zeros((self._x.shape[1],1))
+        x = appendNumberToEveryRow(self._x,1)
+        y = reshapeVector(self._y,(self._numRecords,1))
+        weights = np.zeros((self._x.shape[1]+1,1))
 
         # Performing the calculation
-        x = self._x 
-        y = self._y 
         n = self._numRecords
 
         for _ in range(numInterations):
@@ -73,5 +69,18 @@ class LinearRegression:
     """
     def getParametersNewtonMethod(self,numIterations):
         pass 
+
+    """
+    Get Mean Squared Error
+    """
+    def getMSEValue(self,weights):
+        # Converting the input into suitable shapes
+        x = appendNumberToEveryRow(self._x,1)
+        y = self._y
+
+        # Performing the Calculations
+        errorValue = getMeanSquaredError(x,weights,y)
+        return errorValue
+
 
     
