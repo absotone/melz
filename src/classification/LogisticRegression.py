@@ -48,13 +48,13 @@ class LogisticRegression:
         return weights
         
 
-
-
-    def getParameterGradientAscent(self):
-        pass 
-
+    """
+    Get Solution for Logistic Regression using Newton's Method
+    """
     def getNewtonMethodSolution(self):
         pass 
 
     def getAccuracy(self,weights):
+        x = appendNumberToEveryRow(self._x,1)
+        y = reshapeVector(self._y,(self._numRecords,1))
         return getErrorMetrics(x,weights,y)

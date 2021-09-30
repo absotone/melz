@@ -1,10 +1,10 @@
 import numpy as np
 import pandas as pd 
 
-"""
-Functions to aid in Regression Calculation and Analysis
-"""
 
+"""
+Get RMSE error of Regression
+"""
 def getMeanSquaredError(given_data,weights,test_data):
     n = given_data.shape[0]
 
@@ -20,11 +20,20 @@ def getMeanSquaredError(given_data,weights,test_data):
     
     return errorValue
 
+"""
+Parse a Pandas DataFrame to a Numpy Array
+"""
 def dataFrameToNumpyArray(dataFrame):
     pass 
 
+"""
+Append a fixed number to the start of every row in a matrix
+"""
 def appendNumberToEveryRow(array,number):
     return np.insert(array,0,number,axis=1)
 
+"""
+Reshape a given array to newDimensions.
+"""
 def reshapeVector(array,newDimensions):
     return np.reshape(array,newDimensions)
