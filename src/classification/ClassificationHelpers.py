@@ -59,22 +59,13 @@ def dataFrameToNumpyArray(dataFrame):
 """
 Compute the Gaussian Probability
 """
-def getGaussianLogVector(x,meanValue,varianceValue):
+def getGaussianLogVector(x,mean,sigma):
 
-    # Step 1
-    numFeatures = x.shape[1]
-
-    # Step 2
-    calc1 = np.log(varianceValue)
-
-    # Step 3
-    calc2  = -(numFeatures / 2.0) * np.log(2.0 * np.pi) - (calc1 / 2.0)
-
-    # Step 4 
-    calc3  = np.power(x - meanValue, 2) / (varianceValue)
-
-    # Step 5
-    return calc2 - 0.5 * np.sum(calc3,1)
+    const = -x.shape[1] / 2 * np.log(2 * np.pi) - 0.5 * np.sum(
+            np.log(sigma)
+        )
+    probs = 0.5 * np.sum(np.power(x - mean, 2) / (sigma), 1)
+    return const - probs
     
 
 """
