@@ -79,3 +79,9 @@ Get the variance over an array with column Calculation Index colIndex
 """
 def getVarianceOverArray(array, colIndex):
     return np.var(array, axis = colIndex)
+
+"""
+Return the Index of the Maximum Value of Array along axis colIndex
+"""
+def getMaximumIndex(array, colIndex):
+    return np.argmax(array, axis = colIndex)

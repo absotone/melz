@@ -1,6 +1,6 @@
 import pandas as pd 
 import numpy as np 
-from ClassificationHelpers import getGaussianLogVector,getMeanOverArray,getVarianceOverArray,reshapeVector
+from ClassificationHelpers import getGaussianLogVector,getMeanOverArray,getVarianceOverArray,reshapeVector, getMaximumIndex
 
 """
 Implementation of the Gaussian Naive Bayes Classifier
@@ -67,6 +67,8 @@ class NaiveBayes:
 
             # Step 7 
             probabilityValues[:, classLabel] = calc3 
+
+        return getMaximumIndex(probabilityValues,1)
             
 
 
