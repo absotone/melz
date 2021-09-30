@@ -54,3 +54,9 @@ Parse a Pandas DataFrame to a Numpy Array
 """
 def dataFrameToNumpyArray(dataFrame):
     return dataFrame.to_numpy()
+
+"""
+Compute the Gaussian Probability
+"""
+def getGaussianValue():
+    pass 
