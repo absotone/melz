@@ -1,3 +1,4 @@
+from numpy.core.fromnumeric import var
 import pandas as pd
 import numpy as np
 
@@ -58,5 +59,32 @@ def dataFrameToNumpyArray(dataFrame):
 """
 Compute the Gaussian Probability
 """
-def getGaussianValue():
-    pass 
+def getGaussianLogVector(x,meanValue,varianceValue):
+
+    # Step 1
+    numFeatures = x.shape[1]
+
+    # Step 2
+    calc1 = np.log(varianceValue)
+
+    # Step 3
+    calc2  = -(numFeatures / 2.0) * np.log(2.0 * np.pi) - (calc1 / 2.0)
+
+    # Step 4 
+    calc3  = np.power(x - meanValue, 2) / (varianceValue)
+
+    # Step 5
+    return calc2 - 0.5 * np.sum(calc3,1)
+    
+
+"""
+Get the mean over an array with column Calculation Index colIndex
+"""
+def getMeanOverArray(array, colIndex):
+    return np.mean(array,axis = colIndex)
+
+"""
+Get the variance over an array with column Calculation Index colIndex
+"""
+def getVarianceOverArray(array, colIndex):
+    return np.var(array, axis = colIndex)

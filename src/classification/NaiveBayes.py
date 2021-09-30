@@ -1,5 +1,6 @@
 import pandas as pd 
 import numpy as np 
+from ClassificationHelpers import getGaussianLogVector,getMeanOverArray,getVarianceOverArray
 
 """
 Implementation of the Gaussian Naive Bayes Classifier
@@ -25,7 +26,40 @@ class NaiveBayes:
     Get Predicted Class Labels 
     """
     def getClassLabels(self):
-        pass 
+        x = self._x 
+        y = self._y 
+        n = self._numRecords
+        m = self._numFeatures
+        k = self._numClasses
+
+        probabilityValues = np.zeros((n,k))
+
+        for classLabel in range(k):
+            classId = str(classLabel)
+
+            # Step 1 
+            calc1 = x[y == classLabel]
+
+            # Step 2
+            self._meanValues[classId] = getMeanOverArray(calc1,0)
+
+            # Step 3 
+            self._varianceValues[classId] = getVarianceOverArray(calc1,0)
+
+            # Step 4 
+            self._likelihoodValues[classId] = calc1.shape[0]/x.shape[0]
+
+            # Step 5 
+            calc2 = getGaussianLogVector(x,self._meanValues[classId],self._varianceValues[classId])
+
+            # Step 6 
+            calc3 = calc2 + np.log(self._likelihoodValues[classId])
+
+            # Step 7 
+            probabilityValues[:, classLabel] = calc3 
+            
+
+
 
     """
     Get Accuracy
