@@ -1,6 +1,6 @@
 import pandas as pd 
 import numpy as np 
-from ClassificationHelpers import appendNumberToEveryRow,reshapeVector, sigmoid
+from ClassificationHelpers import appendNumberToEveryRow,reshapeVector, sigmoid, getErrorMetrics
 
 """
 Implementation of the Logistic Regression Algorithm
@@ -56,5 +56,5 @@ class LogisticRegression:
     def getNewtonMethodSolution(self):
         pass 
 
-    def getAccuracy(self):
-        pass 
+    def getAccuracy(self,weights):
+        return getErrorMetrics(x,weights,y)
