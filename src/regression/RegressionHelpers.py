@@ -24,7 +24,8 @@ def getMeanSquaredError(given_data,weights,test_data):
 Parse a Pandas DataFrame to a Numpy Array
 """
 def dataFrameToNumpyArray(dataFrame):
-    pass 
+    return dataFrame.to_numpy()
+ 
 
 """
 Append a fixed number to the start of every row in a matrix

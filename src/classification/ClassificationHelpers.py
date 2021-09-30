@@ -32,11 +32,11 @@ def getErrorMetrics(x,weights,y):
     fn = 0
 
     for i in range(len(probabilityValues)):
-        if probabilityValues[i] == 1 and y[i] == 1:
+        if probabilityValues[i] >= 0.5 and y[i] == 1:
             tp += 1
-        elif probabilityValues[i] == 0 and y[i] == 0:
+        elif probabilityValues[i] < 0.5 and y[i] == 0:
             tn += 1 
-        elif probabilityValues[i] == 1 and y[i] == 0:
+        elif probabilityValues[i] >= 0.5 and y[i] == 0:
             fp += 1 
         else:
             fn += 1 
@@ -48,3 +48,9 @@ def getErrorMetrics(x,weights,y):
     accuracyDict["fp"] = fp
     accuracyDict["fn"] = fn 
     return accuracyDict 
+
+"""
+Parse a Pandas DataFrame to a Numpy Array
+"""
+def dataFrameToNumpyArray(dataFrame):
+    return dataFrame.to_numpy()
