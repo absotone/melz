@@ -76,5 +76,13 @@ class NaiveBayes:
     """
     Get Accuracy
     """
-    def getAccuracy(self):
-        pass
+    def getAccuracy(self,labelValues):
+        
+        totalCorrect = 0
+        y = self._y
+        
+        for i in range(len(y)):
+            if labelValues[i] == y[i]:
+                totalCorrect += 1 
+        
+        return totalCorrect/len(labelValues)
