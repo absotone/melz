@@ -19,3 +19,10 @@ def generateBoxPlot(x,figSize):
     plt.figure(figsize=figSize)
     sns.boxplot(x)
     plt.show()
+
+"""
+Basic Histogram
+"""
+def generateHistogram(x,y):
+    plt.hist(x,y)
+    plt.show()
