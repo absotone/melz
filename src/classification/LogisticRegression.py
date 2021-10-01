@@ -52,7 +52,12 @@ class LogisticRegression:
     Get Solution for Logistic Regression using Newton's Method
     """
     def getNewtonMethodSolution(self):
-        pass 
+        # Converting the input into suitable shapes
+        x = appendNumberToEveryRow(self._x,1)
+        y = reshapeVector(self._y,(self._numRecords,1))
+        n = self._numRecords
+
+
 
     def getAccuracy(self,weights):
         x = appendNumberToEveryRow(self._x,1)

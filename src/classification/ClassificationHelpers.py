@@ -6,7 +6,7 @@ import numpy as np
 Sigmoid Function
 """
 def sigmoid(x):
-    return 1.0/(1.0 + np.exp(x))
+    return 1.0/(1.0 + np.exp(-x))
 
 """
 Append a number to the start of every row in a matrix
