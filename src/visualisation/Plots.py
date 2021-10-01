@@ -11,3 +11,11 @@ Basic Scatter Plot
 def generateScatterPlot(x,y):
     plt.scatter(x,y)
     plt.show()
+
+"""
+Basic Box Plot
+"""
+def generateBoxPlot(x,figSize):
+    plt.figure(figsize=figSize)
+    sns.boxplot(x)
+    plt.show()
