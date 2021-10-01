@@ -12,6 +12,7 @@ def generateScatterPlot(x,y):
     plt.scatter(x,y)
     plt.show()
 
+
 """
 Basic Box Plot
 """
@@ -26,3 +27,11 @@ Basic Histogram
 def generateHistogram(x,y):
     plt.hist(x,y)
     plt.show()
+
+"""
+Basic Correlation Matrix
+"""
+def generateCorrelationMatrix(data):
+    corr = df.corr()
+    corr.style.background_gradient()
+    return corr
