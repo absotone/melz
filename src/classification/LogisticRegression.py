@@ -5,6 +5,9 @@ from ClassificationHelpers import appendNumberToEveryRow,reshapeVector,sigmoid,g
 import numpy as np
 import pandas as pd 
 
+"""
+Implementation of the Logistic Regression Algorithm
+"""
 class LogisticRegression:
 
     """
@@ -57,7 +60,6 @@ class LogisticRegression:
         y = reshapeVector(self._y,(self._numRecords,1))
         n = self._numRecords
 
-        # Performing the Calculations
 
     """
     Get Training Accuracy
@@ -65,4 +67,14 @@ class LogisticRegression:
     def getAccuracy(self,weights):
         x = appendNumberToEveryRow(self._x,1)
         y = reshapeVector(self._y,(self._numRecords,1))
+        return getErrorMetrics(x,weights,y)
+    
+    """
+    Get Testing Accuracy
+    """
+    def getTestingAccuracy(self,x,y,weights):
+        x = np.array(x)
+        y = np.array(y)
+        x = appendNumberToEveryRow(x,1)
+        y = reshapeVector(y,(x.shape[0],1))
         return getErrorMetrics(x,weights,y)
