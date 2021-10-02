@@ -1,10 +1,10 @@
-import pandas as pd 
-import numpy as np 
-from ClassificationHelpers import appendNumberToEveryRow,reshapeVector, sigmoid, getErrorMetrics
-
 """
 Implementation of the Logistic Regression Algorithm
 """
+from ClassificationHelpers import appendNumberToEveryRow,reshapeVector,sigmoid,getErrorMetrics
+import numpy as np
+import pandas as pd 
+
 class LogisticRegression:
 
     """
@@ -16,7 +16,7 @@ class LogisticRegression:
         self._numRecords = self._x.shape[0]
 
     """
-    Closed Form Solution
+    Gradient Descent Solution
     """
     def getParametersGradientDescent(self,learningRate = 0.00001,numInterations = 1000,decay = 0):
         # Converting the input into suitable shapes
@@ -37,10 +37,10 @@ class LogisticRegression:
             calc2 = sigmoid(calc1)
 
             # Step 3 
-            calc3 = np.dot(x.T, (calc2 - y))
+            calc3 = np.dot(x.T, (y - calc2))
 
             # Step 4 
-            weights -= (-1.0/n) * learningRate * calc3 
+            weights += (1.0/n) * learningRate * calc3 
 
             # Step 5 
             learningRate -= decay
@@ -57,8 +57,11 @@ class LogisticRegression:
         y = reshapeVector(self._y,(self._numRecords,1))
         n = self._numRecords
 
+        # Performing the Calculations
 
-
+    """
+    Get Training Accuracy
+    """
     def getAccuracy(self,weights):
         x = appendNumberToEveryRow(self._x,1)
         y = reshapeVector(self._y,(self._numRecords,1))

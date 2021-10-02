@@ -26,7 +26,7 @@ Get Error Metrics of the Model
 def getErrorMetrics(x,weights,y):
     predictedY = np.dot(x,weights)
     probabilityValues = sigmoid(predictedY)
-
+    
     tp = 0
     tn = 0
     fp = 0
