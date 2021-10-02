@@ -1,3 +1,4 @@
+from numpy.core.fromnumeric import mean
 import pandas as pd 
 import numpy as np 
 from ClassificationHelpers import getGaussianLogVector,getMeanOverArray,getVarianceOverArray,reshapeVector, getMaximumIndex
@@ -47,7 +48,6 @@ class NaiveBayes:
                 calc1.append(x[i])
             
             calc1 = np.array(calc1)
-            print(calc1.shape)
 
             # Step 2
             self._meanValues[classId] = getMeanOverArray(calc1,0)
@@ -60,7 +60,6 @@ class NaiveBayes:
 
             # Step 5 
             calc2 = getGaussianLogVector(x,self._meanValues[classId],self._varianceValues[classId])
-            print(calc2.shape)
 
             # Step 6 
             calc3 = calc2 + np.log(self._likelihoodValues[classId])
@@ -86,3 +85,43 @@ class NaiveBayes:
                 totalCorrect += 1 
         
         return totalCorrect/len(labelValues)
+    
+    """
+    Get Accuracy on Testing Data
+    """
+    def getAccuracyTesting(self,x,y):
+        
+        x = np.array(x)
+        y = np.array(y)
+        y = reshapeVector(y,(x.shape[0],1))
+        
+        n = x.shape[0]
+        m = self._numFeatures
+        k = self._numClasses
+
+        probabilityValues = np.zeros((n,k))
+        
+        mean = self._meanValues
+        variance = self._varianceValues
+        likelihood = self._likelihoodValues
+
+        for classId in range(k):
+            classLabel = str(classId)
+
+            # Step 1 
+            calc1 = getGaussianLogVector(x,mean[classLabel],variance[classLabel])
+
+            # Step 2
+            calc2 = calc1 + np.log(likelihood[classLabel])
+
+            # Step 3 
+            probabilityValues[:, classId] = calc2 
+        
+        predictions = getMaximumIndex(probabilityValues,1)
+        
+        numCorrect = 0 
+        for i in range(len(predictions)):
+            if predictions[i] == y[i]:
+                numCorrect += 1
+        
+        return numCorrect/len(predictions)
