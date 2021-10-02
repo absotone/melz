@@ -32,6 +32,6 @@ def generateHistogram(x,y):
 Basic Correlation Matrix
 """
 def generateCorrelationMatrix(data):
-    corr = df.corr()
+    corr = data.corr()
     corr.style.background_gradient()
     return corr
