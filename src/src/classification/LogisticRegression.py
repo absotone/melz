@@ -34,13 +34,13 @@ class LogisticRegression:
 
         for _ in range(numInterations):
 
-            # Step 1
+            # Getting the sigmoid of the current iteration
             calc1 = np.dot(x,weights)
 
-            # Step 2
+            
             calc2 = sigmoid(calc1)
 
-            # Step 3 
+            # Updating the parameters 
             calc3 = np.dot(x.T, (y - calc2))
 
             # Step 4 
@@ -67,12 +67,14 @@ class LogisticRegression:
 
         for _ in range(numIterations):
 
+          # Getting the sigmoid of the current iteration
           calc1 = np.dot(x,weights)
 
           calc2 = sigmoid(calc1)
 
           calc3 = (1.0/n) * np.dot(x.T, (calc2 - y))
 
+          # Generating the Hessian Matrix
           temp1 = calc2.reshape(n,)
           temp2 = np.diag(temp1)
 
@@ -81,6 +83,7 @@ class LogisticRegression:
 
           calc4 = (1.0/n) * (x.T.dot(temp2)).dot(temp4).dot(x)
 
+          # Multiplying the Hessian Inverse with the Sigmoid of the Current Iteration
           weights -= getMatrixInverse(calc4).dot(calc3)
         
         return weights
