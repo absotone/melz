@@ -1,6 +1,14 @@
 import numpy as np
 import pandas as pd 
 
+"""
+Get Modulus of a given value
+"""
+def mod(x):
+    if x >= 0:
+        return x 
+    else:
+        return -x
 
 """
 Get RMSE error of Regression
@@ -38,3 +46,21 @@ Reshape a given array to newDimensions.
 """
 def reshapeVector(array,newDimensions):
     return np.reshape(array,newDimensions)
+
+"""
+Get MARE value of Regression.
+"""
+def getMeanAbsoluteError(given_data,weights,test_data):
+    n = given_data.shape[0]
+
+    # Performing the calculation
+    errorValue = 0
+
+    # Step 1 
+    calc1 = np.dot(given_data,weights)
+
+    # Step 2
+    for i in range(n):
+        errorValue += mod(calc1[i] - test_data[i])/float(n)
+    
+    return errorValue

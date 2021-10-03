@@ -61,10 +61,7 @@ def dataFrameToNumpyArray(dataFrame):
 Compute the Gaussian Probability
 """
 def getGaussianLogVector(x,mean,sigma):
-
-    const = -x.shape[1] / 2 * np.log(2 * np.pi) - 0.5 * np.sum(
-            np.log(sigma)
-        )
+    const = -x.shape[1] / 2 * np.log(2 * np.pi) - 0.5 * np.sum(np.log(sigma))
     probs = 0.5 * np.sum(np.power(x - mean, 2) / (sigma), 1)
     return const - probs
     
