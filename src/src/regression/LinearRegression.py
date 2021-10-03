@@ -23,14 +23,13 @@ class LinearRegression:
         y = reshapeVector(self._y,(self._numRecords,1))
 
 
-        # Step 1
+        # Getting the Transposes and Inverses of the input array
         calc1 = np.dot(x.T,x)
         calc2 = np.linalg.inv(calc1)
 
-        # Step 2
+        # Closed form Compuation
         calc3 = np.dot(calc2,x.T)
 
-        #Step 3
         weights = np.dot(calc3,y)
 
         return weights
@@ -50,26 +49,20 @@ class LinearRegression:
 
         for _ in range(numInterations):
 
-            # Step 1 
+            # Getting the objective 
             calc1 = np.dot(x,weights)
 
-            # Step 2 
+            # Gradient Calculation
             calc2 = (2.0/n) * np.dot(x.T,calc1-y)
 
-            # Step 3 
+            # Updating the Parameters 
             weights = weights - learningRate*calc2 
 
-            # Step 4 
+            # Changing the Learning Rate 
             learningRate -= decay
         
         return weights
     
-    """
-    Newton's Method Solution
-    """
-    def getParametersNewtonMethod(self,numIterations):
-        pass 
-
     
     """
     Get Combined Accuracy
