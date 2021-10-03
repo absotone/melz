@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd 
-from RegressionHelpers import appendNumberToEveryRow,reshapeVector, getMeanSquaredError
+from RegressionHelpers import appendNumberToEveryRow,reshapeVector, getMeanSquaredError,getMeanAbsoluteError
 
 """
 Implementation of Multivariate Linear Regression
@@ -70,17 +70,25 @@ class LinearRegression:
     def getParametersNewtonMethod(self,numIterations):
         pass 
 
+    
     """
-    Get Mean Squared Error
+    Get Combined Accuracy
     """
-    def getMSEValue(self,weights):
+    def getAccuracyTraining(self, weights):
         # Converting the input into suitable shapes
-        x = appendNumberToEveryRow(self._x,1)
-        y = self._y
+        x = appendNumberToEveryRow(self._x, 1)
+        y = self._y 
 
-        # Performing the Calculations
-        errorValue = getMeanSquaredError(x,weights,y)
-        return errorValue
+        rmseError = getMeanSquaredError(x,weights,y)
+        mareError = getMeanAbsoluteError(x,weights,y)
+
+        accuracyDict = {
+            "MeanSquaredError" : rmseError,
+            "MeanAbsoluteError" : mareError
+        }
+
+        return accuracyDict
+
 
 
     
