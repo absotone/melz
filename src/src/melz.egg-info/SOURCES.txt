@@ -1,0 +1,9 @@
+LICENSE
+README.md
+pyproject.toml
+setup.cfg
+src/melz.egg-info/PKG-INFO
+src/melz.egg-info/SOURCES.txt
+src/melz.egg-info/dependency_links.txt
+src/melz.egg-info/requires.txt
+src/melz.egg-info/top_level.txt
