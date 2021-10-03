@@ -89,6 +89,31 @@ class LinearRegression:
 
         return accuracyDict
 
+    """
+    Get Accuracy of Test Data
+    """
+    def getAccuracyTesting(self,x,y,weights):
+        
+        # Converting the input into suitable shapes
+        x = np.array(x)
+        y = np.array(y)
+
+        x = appendNumberToEveryRow(x,1)
+        y = reshapeVector(y,(x.shape[0],1))
+
+        # Performing the calculation
+        rmseError = getMeanSquaredError(x,weights,y)
+        mareError = getMeanAbsoluteError(x,weights,y)
+
+        accuracyDict = {
+            "MeanSquaredError" : rmseError,
+            "MeanAbsoluteError" : mareError
+        }
+
+        return accuracyDict
+
+
+
 
 
     
