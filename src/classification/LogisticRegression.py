@@ -5,6 +5,7 @@ from ClassificationHelpers import appendNumberToEveryRow,reshapeVector,sigmoid,g
 import numpy as np
 import pandas as pd 
 
+
 """
 Implementation of the Logistic Regression Algorithm
 """
@@ -54,11 +55,35 @@ class LogisticRegression:
     """
     Get Solution for Logistic Regression using Newton's Method
     """
-    def getNewtonMethodSolution(self):
+    def getNewtonMethodSolution(self, numIterations = 1000):
         # Converting the input into suitable shapes
         x = appendNumberToEveryRow(self._x,1)
         y = reshapeVector(self._y,(self._numRecords,1))
         n = self._numRecords
+
+        # Performing the computation
+        numFeatures = x.shape[1]
+        weights = np.zeros((numFeatures,1))
+
+        for _ in range(numIterations):
+
+          calc1 = np.dot(x,weights)
+
+          calc2 = sigmoid(calc1)
+
+          calc3 = (1.0/n) * np.dot(x.T, (calc2 - y))
+
+          temp1 = calc2.reshape(n,)
+          temp2 = np.diag(temp1)
+
+          temp3 = (1-calc2).reshape(n,)
+          temp4 = np.diag(temp3)
+
+          calc4 = (1.0/n) * (x.T.dot(temp2)).dot(temp4).dot(x)
+
+          weights -= np.linalg.pinv(calc4).dot(calc3)
+        
+        return weights
 
 
     """
