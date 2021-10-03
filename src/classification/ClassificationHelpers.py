@@ -1,4 +1,5 @@
 from numpy.core.fromnumeric import var
+from numpy.linalg import pinv
 import pandas as pd
 import numpy as np
 
@@ -85,3 +86,9 @@ Return the Index of the Maximum Value of Array along axis colIndex
 """
 def getMaximumIndex(array, colIndex):
     return np.argmax(array, axis = colIndex)
+
+"""
+Return the Inverse of a Matrix
+"""
+def getMatrixInverse(x):
+    return pinv(x)

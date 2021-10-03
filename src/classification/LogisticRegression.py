@@ -1,7 +1,7 @@
 """
 Implementation of the Logistic Regression Algorithm
 """
-from ClassificationHelpers import appendNumberToEveryRow,reshapeVector,sigmoid,getErrorMetrics
+from ClassificationHelpers import appendNumberToEveryRow, getMatrixInverse,reshapeVector,sigmoid,getErrorMetrics
 import numpy as np
 import pandas as pd 
 
@@ -81,7 +81,7 @@ class LogisticRegression:
 
           calc4 = (1.0/n) * (x.T.dot(temp2)).dot(temp4).dot(x)
 
-          weights -= np.linalg.pinv(calc4).dot(calc3)
+          weights -= getMatrixInverse(calc4).dot(calc3)
         
         return weights
 
