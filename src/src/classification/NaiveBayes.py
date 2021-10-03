@@ -41,7 +41,7 @@ class NaiveBayes:
         for classLabel in range(k):
             classId = str(classLabel)
 
-            # Step 1 
+            # Generating the cut of the dataset where label = classLabel 
             calc1 = []
             for i in range(len(x)):
               if y[i] == classLabel:
@@ -49,24 +49,24 @@ class NaiveBayes:
             
             calc1 = np.array(calc1)
 
-            # Step 2
+            # Calculating the mean values a priori
             self._meanValues[classId] = getMeanOverArray(calc1,0)
 
-            # Step 3 
+            # Calculating the variance values a priori 
             self._varianceValues[classId] = getVarianceOverArray(calc1,0)
 
-            # Step 4 
+            # Calculating the likelihood values a priori 
             self._likelihoodValues[classId] = calc1.shape[0]/x.shape[0]
 
-            # Step 5 
+            # Getting the Gaussian Approximation
             calc2 = getGaussianLogVector(x,self._meanValues[classId],self._varianceValues[classId])
 
-            # Step 6 
+            # Updating the Probability Values
             calc3 = calc2 + np.log(self._likelihoodValues[classId])
 
-            # Step 7 
             probabilityValues[:, classLabel] = calc3 
 
+        # Most Likely Outcome
         return getMaximumIndex(probabilityValues,1)
             
 
@@ -101,6 +101,8 @@ class NaiveBayes:
 
         probabilityValues = np.zeros((n,k))
         
+        # Use the Training Calculations
+
         mean = self._meanValues
         variance = self._varianceValues
         likelihood = self._likelihoodValues
@@ -108,10 +110,10 @@ class NaiveBayes:
         for classId in range(k):
             classLabel = str(classId)
 
-            # Step 1 
+            # Get the apriori gaussian values 
             calc1 = getGaussianLogVector(x,mean[classLabel],variance[classLabel])
 
-            # Step 2
+            # LogOdds Simplification
             calc2 = calc1 + np.log(likelihood[classLabel])
 
             # Step 3 
